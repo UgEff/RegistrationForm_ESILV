@@ -58,8 +58,12 @@ computed: {
 methods: {
 
     validateName() {
-    const regex = /^[^\s@]+$/; // Pas d'espace
-    this.errors.name = regex.test(this.user.name) ? null : 'Le nom ne doit pas contenir d\'espaces ou de caractères spéciaux.';
+    if (this.user.name.length < 3) {
+        this.errors.name = 'Le nom d\'utilisateur doit contenir au moins 3 caractères.';
+    }else{
+        const regex = /^[^\s@]+$/; // Pas d'espace
+        this.errors.name = regex.test(this.user.name) ? null : 'Le nom ne doit pas contenir d\'espaces ou de caractères spéciaux.';
+    }
     },
 
     validateEmail() {
@@ -78,7 +82,6 @@ methods: {
 
     if (!this.errors.name && !this.errors.email && !this.errors.password) {
         console.log('Formulaire soumis:', this.user);
-        // Traitez les données du formulaire comme nécessaire
     }
     }
 }
@@ -95,44 +98,40 @@ methods: {
     max-width: 800px;
     margin: 60px auto;
     padding: 30px;
-    border: 1px solid #333; /* Une bordure plus discrète */
+    border: 1px solid #333;
     border-radius: 5px;
-    background-color: #1a1a1a; /* Une nuance de noir */
-    color: #fff; /* Texte en blanc pour contraster avec le fond */
+    background-color: #1a1a1a;
+    color: #fff;
 }
 
-/* Groupe de formulaires pour un meilleur alignement */
 .form-group {
     margin-bottom: 15px;
 }
 
-/* Style des labels */
 label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #ccc; /* Gris clair pour les labels pour un meilleur contraste */
+    color: #ccc; 
 }
 
-/* Style des inputs */
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+
+input[type="text"],input[type="email"],input[type="password"] {
     width: 100%;
     padding: 12px;
     margin-top: 8px;
-    border: 2px solid #555; /* Bordure plus sombre */
-    background-color: #333; /* Fond des champs plus sombre */
-    color: #fff; /* Texte des inputs en blanc */
+    border: 2px solid #555; 
+    background-color: #333; 
+    color: #fff;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
-/* Bouton de soumission */
+
 button[type="submit"] {
     width: 100%;
-    background-color: #ffcc00; /* Jaune */
-    color: #000; /* Texte du bouton en noir */
+    background-color: #ffcc00;
+    color: #000;
     padding: 12px 20px;
     border: none;
     border-radius: 5px;
@@ -141,12 +140,13 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #e6b800; /* Un jaune un peu plus foncé au survol */
+    background-color: #e6b800;
 }
 
-/* Messages d'erreur */
+
 .error {
-    color: #ff6666; /* Un rouge légèrement plus doux pour les erreurs, pour rester lisible sur fond sombre */
+    color: #ff6666;
+    font-family: Arial, sans-serif;
 }
 
 /* Amélioration visuelle lors du focus sur un champ */
